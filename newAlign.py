@@ -16,12 +16,9 @@ objects = mc.ls(selection = True)
 #centre pivot
 mc.xform(objects, cp=True, p=True)
 
-#define a funtion to freeze transformations and delete the history of the objects
-def freezeDelete():
-    mc.makeIdentity(objects, apply = True, t=1, r=1, s=1, n=0)
-    mc.bakePartialHistory(objects, prePostDeformers = True)
-    
-freezeDelete()
+#delete the history of the objects
+mc.bakePartialHistory(objects, prePostDeformers = True)
+
     
 # creates a parent contraint with no offset
 prtCns = mc.parentConstraint()
@@ -32,5 +29,10 @@ mc.delete(prtCns)
 #clear selection
 mc.select(clear=True)
 
-#freeze transformations and delete the history  
+#define a funtion to freeze transformations and delete the history of the objects
+def freezeDelete():
+    mc.makeIdentity(objects, apply = True, t=1, r=1, s=1, n=0)
+    mc.bakePartialHistory(objects, prePostDeformers = True)
+    
+
 freezeDelete()
